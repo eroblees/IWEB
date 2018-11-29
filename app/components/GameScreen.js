@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import Header from './Header.js';
 import Board from './Board.js';
+import MyButton from './MyButton.js';
 
 const PLAYER_X = "Player 1 (X)";
 const PLAYER_0 = "Player 2 (0)";
@@ -87,6 +88,7 @@ export default class App extends React.Component {
       <View style={{flex:1, margin:10, justifyContent:'center'}}>
         <Header text={text}/>
         <Board values={this.state.values} onClick={this._onClick} winner={this.state.winner}/>
+        <MyButton onPress={() => this.props.navigation.goBack()} text={"Go back"}/>
       </View>
     );
   }

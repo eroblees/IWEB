@@ -4,7 +4,25 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import GlobalState from './../reducers/reducers';
 import { PLAYER_X, INITIAL_BOARD } from '../constants/constants';
+
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+
+import IndexScreen from './IndexScreen';
 import GameScreen from './GameScreen';
+
+const AppNavigator = createStackNavigator({
+    IndexScreen: {
+      screen: IndexScreen
+    },
+    GameScreen: {
+      screen: GameScreen
+    }
+  },{
+    initialRouteName: "IndexScreen",
+    headerMode: 'none'
+})
+ 
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class ReduxProvider extends React.Component {
     constructor(props) {
@@ -19,9 +37,7 @@ export default class ReduxProvider extends React.Component {
     render() {
         return (
            <Provider store={ this.store }>
-                <View style={{ flex: 1 }}>
-                    <GameScreen store={ this.store } />
-                </View>
+                <AppContainer />
             </Provider>
         );
     }

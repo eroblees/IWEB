@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import Header from './Header.js';
 import Board from './Board.js';
+import MyButton from './MyButton.js';
 
 import { connect } from 'react-redux';
 import { playPosition } from './../reducers/actions';
@@ -31,6 +32,7 @@ class GameScreen extends React.Component {
       <View style={{flex:1, margin:10, justifyContent:'center'}}>
         <Header text={text}/>
         <Board values={this.props.values} onClick={this._onClick} winner={this.props.winner}/>
+        <MyButton onPress={() => this.props.navigation.goBack()} text={"Go back"}/>
       </View>
     );
   }

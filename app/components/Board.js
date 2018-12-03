@@ -18,8 +18,8 @@ export default class Board extends React.Component {
       let boardRow = rowValues.map((value,columnIndex) => {
         let squareKey = "" + rowIndex + columnIndex;
         let squareDisabled = (value === "-" ? false : true);
-        if(typeof this.props.winner != "undefined"){  
-          squareDisabled = true;  
+        if(this.props.winner !== null){  
+          squareDisabled = true;
         }
         return (
           <Square value={value} key={squareKey} rowIndex={rowIndex} columnIndex={columnIndex} onClick={this._onClick} squareDisabled={squareDisabled}/>

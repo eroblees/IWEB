@@ -4,90 +4,43 @@ import { View } from 'react-native';
 import Header from './Header.js';
 import Board from './Board.js';
 
-const PLAYER_X = "Player 1 (X)";
-const PLAYER_0 = "Player 2 (0)";
+import { connect } from 'react-redux';
+import { playPosition } from './../reducers/actions';
 
-export default class App extends React.Component {
+class GameScreen extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-        turn: PLAYER_X,
-        winner: undefined,
-        values: [
-        ['-', '-', '-'],
-        ['-', '-', '-'],
-        ['-', '-', '-'],
-        ],
-    };
     this._onClick = this._onClick.bind(this);
   }
 
   componentDidUpdate(){
-    if(typeof this.state.winner !== "undefined"){
+    if(this.props.winner !== null){
       setTimeout(function(){
-        alert("The winner is " + this.state.winner);
+        alert("The winner is " + this.props.winner);
       }.bind(this),0);
     }
   }
 
   _onClick(rowNumber,columnNumber){
-    if(typeof this.state.winner !== "undefined"){
-      return;
-    }
-    var newValues = this.state.values.slice(); //Copy array to a new array (this method is valid for arrays of literal values)
-    var newValue = (this.state.turn === PLAYER_X ? 'X' : '0');
-    newValues[rowNumber][columnNumber] = newValue;
-    this.setState({
-      turn: (this.state.turn === PLAYER_X ? PLAYER_0 : PLAYER_X),
-      winner: this._getWinner(newValues),
-      values: newValues
-    });
-  }
-
-  _getWinner(values){
-    var winner = undefined;
-    var n = values.length;
-    for(let i=0; i<n; i++){
-      for(let j=0; j<n; j++){
-        if(values[i][j] !== "-"){
-          var horizontalRight = (n - i > 2);
-          var verticalDown = (n - j > 2);
-          var diagonalRightDown = ((horizontalRight)&&(verticalDown));
-          if(horizontalRight){
-            if((values[i][j]===values[i+1][j])&&(values[i][j]===values[i+2][j])){
-              winner = values[i][j];
-            }
-          }
-          if(verticalDown){
-            if((values[i][j]===values[i][j+1])&&(values[i][j]===values[i][j+2])){
-              winner = values[i][j];
-            }
-          }
-          if(diagonalRightDown){
-            if((values[i][j]===values[i+1][j+1])&&(values[i][j]===values[i+2][j+2])){
-              winner = values[i][j];
-            }
-          }
-        }
-      }
-    }
-    if(typeof winner !== "undefined"){
-      if(winner === 'X'){
-        winner = PLAYER_X;
-      } else {
-        winner = PLAYER_0;
-      }
-    }
-    return winner;
+    this.props.dispatch(playPosition(rowNumber, columnNumber, this.props.turn, this.props.values));
   }
 
   render(){
-    var text = "Turn of " + this.state.turn;
+    var text = "Turn of " + this.props.turn;
     return (
       <View style={{flex:1, margin:10, justifyContent:'center'}}>
         <Header text={text}/>
-        <Board values={this.state.values} onClick={this._onClick} winner={this.state.winner}/>
+        <Board values={this.props.values} onClick={this._onClick} winner={this.props.winner}/>
       </View>
     );
   }
 }
+
+function mapStateToProps(state) {
+    return {
+        values: state.values,
+        turn: state.turn,
+        winner: state.winner
+    };
+}
+export default connect(mapStateToProps)(GameScreen);

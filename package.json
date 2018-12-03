@@ -11,7 +11,9 @@
   "dependencies": {
     "expo": "^27.0.0",
     "react": "16.5.0",
-    "react-native": "0.55.2"
+    "react-native": "0.55.2",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

@@ -1,10 +1,10 @@
 import React from 'react';
-import GameScreen from './app/components/GameScreen';
+import ReduxProvider from './app/components/ReduxProvider';
 
 export default class App extends React.Component {
   render() {
     return (
-      <GameScreen/>
+      <ReduxProvider/>
     );
   }
 }

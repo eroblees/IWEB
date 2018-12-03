@@ -16,7 +16,7 @@ export default class Board extends React.Component {
       let boardRow = rowValues.map((value,columnIndex) => {
         let squareKey = "" + rowIndex + columnIndex;
         let squareClassName = (value === "-" ? "clickable" : "not_clickable");
-        if(typeof this.props.winner != "undefined"){
+        if(this.props.winner !== null){
           squareClassName = "not_clickable";
         }
         return (

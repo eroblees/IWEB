@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>La brújula de los colores</title></head>
+<body>
+<div class="frase">
+<p id="a" class="frase">Cuando azul apunta al norte, morado apunta al sur.</p>
+<p id="b" class="frase" >Cuando amarillo apunta al este, verde apunta al oeste.</p>
+<p id="c" class="frase">Cuando negro apunta al sur, marrón apunta al este.</p>
+<p id="d" class="frase">Cuando rojo apunta al oeste, rosa apunta al norte.</p>
+<p id="e" class="frase">Para descifrar el código, <span id="e1"></span> debe apuntar al
+<span id="e2"></span>.</p>
+</div>
+<script type="text/javascript">
+var colores =
+["morado","marron","cian","naranja","negro","verde","azul","rojo","gris","lima","rosa","amarillo"];
+var ncolores = [];
+for(var i=7; i>=0; i--){
+if(colores[i].indexOf("m")===-1){ ncolores.push(colores[i]); }
+}
+if (document.querySelectorAll("div p").length >= document.querySelectorAll(".frase").length){
+document.getElementById("e1").innerHTML = ncolores[1];
+document.getElementById("e2").innerHTML =
+document.querySelectorAll("div.frase p")[2].innerHTML.split(" ")[4];
+} else {
+document.getElementById("e1").innerHTML = ncolores[2];
+document.getElementById("e2").innerHTML =
+document.querySelectorAll("div.frase p")[3].innerHTML.split(" ")[8];
+}
+</script>
+</body>
+</html>

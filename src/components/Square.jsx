@@ -7,7 +7,7 @@ export default class Square extends React.Component {
   }
 
   _onClick(){
-    if(this.props.value === "-") {
+    if(this.props.className !== "not_clickable") {
       this.props.onClick(this.props.rowIndex,this.props.columnIndex);
     }
   }

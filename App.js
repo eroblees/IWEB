@@ -1,5 +1,6 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import IndexScreen from './app/components/IndexScreen';
 import GameScreen from './app/components/GameScreen';
